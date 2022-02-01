@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:foodies/Screens/Register/signin.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'package:get/get.dart';
 class SecondSplash extends StatefulWidget {
   const SecondSplash({Key? key}) : super(key: key);
 
@@ -58,8 +60,8 @@ class _SecondSplashState extends State<SecondSplash> {
               viewportFraction: 1,
               onPageChanged: (index , reason)  =>
                   setState(() => activeindex = index),
-              autoPlay: true,
-              autoPlayAnimationDuration: Duration(seconds: 2),
+              // autoPlay: true,
+              // autoPlayAnimationDuration: Duration(seconds: 2),
 
             ),
 
@@ -164,7 +166,11 @@ class _SecondSplashState extends State<SecondSplash> {
                  ElevatedButton(
 
              onPressed: (){
-
+               Get.to(
+                   Signin(),
+                   duration: Duration(seconds: 1),
+                   transition: Transition.leftToRight
+               );
              },
              style:
              ButtonStyle(
