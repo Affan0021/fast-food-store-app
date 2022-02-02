@@ -23,7 +23,7 @@ class _SignupState extends State<Signup> {
   TextEditingController _emailTEC = TextEditingController();
 
   String userEmail = "hell";
-  PickedFile? _imageFile;
+  File? _imageFile;
   // File? _imageFile;
    late String _email, _password;
   final ImagePicker _picker = ImagePicker();
@@ -62,7 +62,7 @@ class _SignupState extends State<Signup> {
                             ),
 
                             imageProfile(),
-
+                            SizedBox( height: height/25),
                             buildName(),
                             SizedBox( height: height/46),
                             buildEmail(),
@@ -433,6 +433,7 @@ class _SignupState extends State<Signup> {
                 takePhoto(ImageSource.camera);
               },
             ),
+            SizedBox(width: 80),
             IconButton(
               icon: Icon(Icons.image),
               onPressed: () {
@@ -440,6 +441,7 @@ class _SignupState extends State<Signup> {
               },
 
             ),
+
           ])
         ],
       ),
@@ -450,7 +452,7 @@ class _SignupState extends State<Signup> {
       source: source,
     );
     setState(() {
-      _imageFile = pickedFile as PickedFile?;
+      _imageFile = File(pickedFile!.path);
     });
   }
 
@@ -460,9 +462,28 @@ class _SignupState extends State<Signup> {
       child: Stack(children: <Widget>[
         CircleAvatar(
           radius: 80.0,
-          backgroundImage:AssetImage("assets/burg.png")
-              // : FileImage(File(_imageFile.path)),
-        ),
+             child:  _imageFile != null
+
+        ?
+        CircleAvatar(
+          radius: 80.0,
+         backgroundImage: FileImage(_imageFile!),
+        // decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //       image: FileImage(imagefile!),
+        //     )
+        // ),
+
+      )
+          : CircleAvatar(
+            radius: 80.0,
+              backgroundImage: AssetImage('assets/profile.png'),
+
+            )
+
+    ),
+
+
         Positioned(
           bottom: 20.0,
           right: 20.0,
@@ -475,7 +496,7 @@ class _SignupState extends State<Signup> {
             },
             child: Icon(
               Icons.camera_alt,
-              color: Colors.teal,
+              color: Colors.black,
               size: 28.0,
             ),
           ),
